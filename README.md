@@ -16,9 +16,8 @@ Os conteúdos principais a serem estudados são:
 
 ## 🔗Link de Acesso
 
-STATUS: EM PROCESSO...
-
 - Documentação: [clique aqui!](https://documenter.getpostman.com/view/25826643/2s93si1Vup).
+- STATUS: EM PROCESSO...
 
 ## 📄Concepção do Projeto
 
