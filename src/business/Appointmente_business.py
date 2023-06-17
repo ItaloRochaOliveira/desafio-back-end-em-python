@@ -1,31 +1,12 @@
 from ..models.appointment_model import Appointment_model
 from ..business.Professional_business import get_professional_by_id
+from ..database.appointment_database import (
+    get_appointment_by_id,
+    get_appointment_by_id_professional,
+    table_appointment,
+)
+from src.service.Gerator_id import Gerator_id
 from datetime import datetime
-import dataset
-import uuid
-
-db = dataset.connect("sqlite:///db/createDatabase.db")
-
-table_appointment = db["appointment"]
-
-
-def get_appointment_by_id_professional(id):
-    appointments = []
-    for appointment in table_appointment:
-        if appointment["professional_id"] == id:
-            appointments.append(appointment)
-
-    return appointments
-
-
-def get_appointment_by_id(id):
-    for appointment in table_appointment:
-        if appointment["id"] == id:
-            return appointment
-
-
-def gerate_uuid4():
-    return uuid.uuid4()
 
 
 class Appointment_business:
@@ -56,7 +37,7 @@ class Appointment_business:
         if (len(content["date"])) != 10:
             raise ValueError("date has to have this format: 00/00/0000")
 
-        id = gerate_uuid4()
+        id = Gerator_id.gerate_uuid4()
         created_at = datetime.now()
 
         newAppointment = Appointment_model(
