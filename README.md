@@ -18,7 +18,7 @@ Os conteúdos principais a serem estudados são:
 
 STATUS: EM PROCESSO...
 
-- Documentação: [clique aqui!](https://documenter.getpostman.com/view/25826643/2s93sW8FGr).
+- Documentação: [clique aqui!](https://documenter.getpostman.com/view/25826643/2s93si1Vup).
 
 ## 📄Concepção do Projeto
 
@@ -39,7 +39,7 @@ python index.py run
 . Requisições:
 - getAppointmentByIdProfessional: Pesquisar todas as consultas relacionada a um id 
 de um profissional.
-- createAppointment: criar consultas informando a data da consulta e informando um 
+- createAppointment: Criar consultas informando a data da consulta e informando um 
 id de um profissional para vincular eles.
 - updateAppointment: Atualizar consultas já cadastradas, atualizando a data, e 
 informando o id da consulta.
