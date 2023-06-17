@@ -5,3 +5,10 @@ venv
 
 .db
 .db*
+*db
+
+.db-shm
+*.db-shm
+
+.db-wal
+*.db-wal
