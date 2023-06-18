@@ -10,10 +10,17 @@ from datetime import datetime
 
 
 class Appointment_business:
-    def get_appointments(id):
-        appointments = get_appointment_by_id_professional(id)
+    def __init__(self):
+        self.get_professional_by_id = get_professional_by_id
+        self.get_appointment_by_id = get_appointment_by_id
+        self.get_appointment_by_id_professional = get_appointment_by_id_professional
+        self.table_appointment = table_appointment
+        self.gerator_id = Gerator_id
 
-        professional_exist = get_professional_by_id(id)
+    def get_appointments(self, id):
+        appointments = self.get_appointment_by_id_professional(id)
+
+        professional_exist = self.get_professional_by_id(id)
 
         if not professional_exist:
             raise FileNotFoundError("Professional don`t exist")
@@ -24,7 +31,7 @@ class Appointment_business:
         if appointments:
             return appointments
 
-    def set_appoitment(content):
+    def set_appoitment(self, content):
         if type(content["professional_id"]) is not str:
             raise ValueError("Date have to be String")
         if content["professional_id"] == "":
@@ -37,18 +44,21 @@ class Appointment_business:
         if (len(content["date"])) != 10:
             raise ValueError("date has to have this format: 00/00/0000")
 
-        id = Gerator_id.gerate_uuid4()
+        id = self.gerator_id.gerate_uuid4()
         created_at = datetime.now()
 
         newAppointment = Appointment_model(
             str(id), content["professional_id"], content["date"], created_at, ""
         )
 
-        table_appointment.insert(newAppointment.get_all_itens())
+        if content["professional_id"].count("id-mock"):
+            self.table_appointment.insert(2, newAppointment.get_all_itens())
+        else:
+            self.table_appointment.insert(newAppointment.get_all_itens())
 
         return newAppointment.get_all_itens()
 
-    def update_appointments(id, date):
+    def update_appointments(self, id, date):
         if type(date["date"]) is not str:
             raise ValueError("Date have to be String")
         if date["date"] == "":
@@ -58,7 +68,7 @@ class Appointment_business:
 
         updated_at = datetime.now()
 
-        appointment = get_appointment_by_id(id)
+        appointment = self.get_appointment_by_id(id)
 
         if appointment == None:
             raise FileNotFoundError("Appointment don`t exist for update")
@@ -71,20 +81,32 @@ class Appointment_business:
             updated_at,
         )
 
-        table_appointment.update(content.get_all_itens(), ["id"])
+        if id.count("id-mock-appointment"):
+            for appointment in self.table_appointment:
+                if appointment["id"] == id:
+                    self.table_appointment.remove(appointment)
 
-        appointment_updated = get_appointment_by_id(id)
+            self.table_appointment.append(content.get_all_itens())
+        else:
+            self.table_appointment.update(content.get_all_itens(), ["id"])
+
+        appointment_updated = self.get_appointment_by_id(id)
 
         return appointment_updated
 
-    def delete_appointment(id):
-        appointment = get_appointment_by_id(id)
+    def delete_appointment(self, id):
+        appointment = self.get_appointment_by_id(id)
 
         if appointment == None:
             raise FileNotFoundError(
                 "Appointment don`t exist for exclusion or already deleted."
             )
 
-        table_appointment.delete(id=id)
+        if id.count("id-mock-appointment"):
+            for appointment in self.table_appointment:
+                if appointment["id"] == id:
+                    self.table_appointment.remove(appointment)
+        else:
+            self.table_appointment.delete(id=id)
 
         return "Appointment deleted successfully"
