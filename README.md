@@ -15,6 +15,7 @@ Os conteúdos principais a serem estudados são:
 - Conter todos os principais métodos: get, post, put e delete.
 - Arquitetura em camadas.
 - Programação Orientada a Objeto.
+- Testes em python.
 
 ## 🔗Link de Acesso
 
