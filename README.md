@@ -6,6 +6,8 @@ O desafio back end em python é uma API feita com o intuito de cadastrar, editar
 
 Fiz o uso de arquitetura em camadas com o conhecimento adquirido até então e por ser uma arquitetura considerada fácil, rápida de ser projetada e entendida.
 
+Fiz o uso da biblioteca do python de testes, o unittest, para fazer os testes das funções da business. Por enquanto só fiz o teste de dados de entrada e saída do arquivo Appointment_business, sem fazer a cobertura de erros e do arquivo business do professional.
+
 Os conteúdos principais a serem estudados são:
 
 - Conceito de python.
