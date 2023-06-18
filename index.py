@@ -10,18 +10,23 @@ app.json.sort_keys = False
 def api_appointment_id(id):
     try:
         if request.method == "GET":
-            return make_response(jsonify(Appointment_business.get_appointments(id)))
+            appointemnt = Appointment_business()
+            return make_response(jsonify(appointemnt.get_appointments(id)))
         elif request.method == "PUT":
             date = request.json
+
+            appointment_business = Appointment_business()
             return make_response(
                 jsonify(
                     message="Appointment updated successfully",
-                    appointment=Appointment_business.update_appointments(id, date),
+                    appointment=appointment_business.update_appointments(id, date),
                 )
             )
         elif request.method == "DELETE":
+            appointment_business = Appointment_business()
+
             return make_response(
-                jsonify(message=Appointment_business.delete_appointment(id))
+                jsonify(message=appointment_business.delete_appointment(id))
             )
     except ValueError as erro:
         return make_response(jsonify(str(erro)), 400)
@@ -35,10 +40,11 @@ def api_appointment_id(id):
 def api_appointment():
     try:
         content = request.json
+        appointment_business = Appointment_business()
         return make_response(
             jsonify(
                 message="Appointment created successfully",
-                appointment=Appointment_business.set_appoitment(content),
+                appointment=appointment_business.set_appoitment(content),
             )
         )
     except ValueError as erro:
